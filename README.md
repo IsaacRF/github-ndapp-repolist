@@ -37,7 +37,10 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 ## General Advice and Tips
 * Please keep code as simple as possible and remove any unused code.
 * Project is well-structured.
+* We would prefer if you follow the material design guidelines.
 * Keep in mind the [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), and the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)).
+* You can use a reactive approach (Ex. RxJava).
+* Make sure the app runs on a ICS+ device.
 * Don't forget the tests, they are really important for us.
 * Be conscious and consistent regarding your coding style.
 * Have fun reading and writing code.
