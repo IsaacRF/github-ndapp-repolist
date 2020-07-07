@@ -45,6 +45,6 @@ Welcome to the XING Coding Challenge! This challenge will give us an idea about 
 * Be conscious and consistent regarding your coding style.
 * Have fun reading and writing code.
 * If you have any final comments about your result please let us know via [final_notes.md](final_notes.md)
-* Once you finish create a release and notify barcelona-hiring@xing.com 
+* Once you finish create a release and notify barcelona-hiring@xing.com
 
 Now, let's get started. We wish you good luck!
