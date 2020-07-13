@@ -13,7 +13,7 @@ class RepoListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_repo_list)
+        setContentView(R.layout.repo_list_activity)
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->

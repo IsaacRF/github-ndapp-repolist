@@ -49,6 +49,6 @@
         app:layout_anchorGravity="bottom|end"
         app:srcCompat="@android:drawable/ic_dialog_info" />
 
-    <include layout="@layout/content_repo_list" />
+    <include layout="@layout/repo_list_content" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
