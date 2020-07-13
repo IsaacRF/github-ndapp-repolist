@@ -1,4 +1,4 @@
-package com.isaacrf.github_ndapp_repolist
+package com.isaacrf.github_ndapp_repolist.features.repo_list
 
 import android.os.Bundle
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -7,12 +7,13 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.isaacrf.github_ndapp_repolist.R
 
-class ScrollingActivity : AppCompatActivity() {
+class RepoListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_scrolling)
+        setContentView(R.layout.activity_repo_list)
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
