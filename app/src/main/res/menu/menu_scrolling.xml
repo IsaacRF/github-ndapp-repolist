@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.isaacrf.github_ndapp_repolist.features.repo_list.RepoListActivity">
+    tools:context="com.isaacrf.github_ndapp_repolist.features.repo_list.views.RepoListActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
