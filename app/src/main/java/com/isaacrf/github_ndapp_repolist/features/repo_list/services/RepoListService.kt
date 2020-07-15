@@ -14,6 +14,6 @@ interface RepoListService {
      * @Path("organizationName") annotation on the organizationName parameter marks it as a
      * replacement for the {organizationName} placeholder in the @GET path
      */
-    @GET("https://api.github.com/orgs/{organizationName}/repos")
+    @GET("/orgs/{organizationName}/repos")
     fun getRepos(@Path("organizationName") organizationName: String): Call<List<Repo>>
 }

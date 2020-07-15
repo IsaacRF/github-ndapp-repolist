@@ -1,5 +1,6 @@
 package com.isaacrf.github_ndapp_repolist.features.repo_list.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.isaacrf.github_ndapp_repolist.features.repo_list.models.Repo
@@ -7,14 +8,16 @@ import com.isaacrf.github_ndapp_repolist.features.repo_list.services.RepoListSer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Layer to abstract data access
  */
-class RepoListRepository {
-    //TODO: Needs injection
-    private val repoListService: RepoListService = TODO()
-
+@Singleton
+class RepoListRepository @Inject constructor(
+    private val repoListService: RepoListService
+){
     /**
      * GET repos for specified organization name
      */
@@ -25,7 +28,8 @@ class RepoListRepository {
                 data.value = response.body()
             }
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-                TODO()
+                //TODO: Report error
+                Log.d("INJECTION TESTING", "getRepos() - Failure")
             }
         })
         return data

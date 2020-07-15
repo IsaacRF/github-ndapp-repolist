@@ -3,6 +3,7 @@
     package="com.isaacrf.github_ndapp_repolist">
 
     <application
+        android:name=".GithubNdApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -10,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".features.repo_list.views.RepoListActivity"
+            android:name=".features.repo_list.ui.RepoListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,4 +22,5 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

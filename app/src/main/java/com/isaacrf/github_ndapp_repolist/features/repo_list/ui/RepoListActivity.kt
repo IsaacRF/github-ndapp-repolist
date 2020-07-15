@@ -1,6 +1,7 @@
-package com.isaacrf.github_ndapp_repolist.features.repo_list.views
+package com.isaacrf.github_ndapp_repolist.features.repo_list.ui
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -11,7 +12,9 @@ import androidx.activity.viewModels
 import androidx.lifecycle.observe
 import com.isaacrf.github_ndapp_repolist.R
 import com.isaacrf.github_ndapp_repolist.features.repo_list.viewmodels.RepoListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RepoListActivity : AppCompatActivity() {
 
     /*ViewModel controls business logic and data representation. A saved state factory is created
@@ -35,6 +38,7 @@ class RepoListActivity : AppCompatActivity() {
         //Observe live data changes and update UI accordingly
         repoListViewModel.repoList.observe(this) {
             // TODO: update UI
+            Log.d("INJECTION TESTING", it.javaClass.toString())
         }
     }
 

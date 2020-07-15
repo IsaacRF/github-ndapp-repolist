@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion 29
@@ -8,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.isaacrf.github_ndapp_repolist"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -37,12 +39,20 @@ dependencies {
     def lifecycle_version = "2.2.0"
     def activity_version = "1.1.0"
     def retrofit_version = "2.7.1"
+    def hilt_lifecycle_version = "1.0.0-alpha01"
+    def hilt_version = "2.28.1-alpha"
 
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+    // Hilt Lifecycle
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle_version"
     // Activity
     implementation "androidx.activity:activity-ktx:$activity_version"
     // ViewModel
@@ -53,6 +63,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation ("com.squareup.okhttp3:okhttp:3.12.12"){
+        //API 19 support
+        //force = true
+        version {
+            strictly "3.12.12"
+        }
+    }
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
