@@ -1,4 +1,4 @@
-package com.isaacrf.github_ndapp_repolist
+package com.isaacrf.github_ndapp_repolist.shared
 
 import android.os.Build
 import java.net.InetAddress

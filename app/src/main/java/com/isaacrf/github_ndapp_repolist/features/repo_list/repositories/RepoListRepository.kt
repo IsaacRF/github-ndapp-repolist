@@ -23,7 +23,7 @@ class RepoListRepository @Inject constructor(
      */
     fun getRepos(organizationName: String): LiveData<List<Repo>> {
         val data = MutableLiveData<List<Repo>>()
-        repoListService.getRepos(organizationName).enqueue(object : Callback<List<Repo>> {
+        repoListService.getRepos(organizationName, 1).enqueue(object : Callback<List<Repo>> {
             override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
                 data.value = response.body()
             }
