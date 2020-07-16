@@ -1,4 +1,4 @@
-package com.isaacrf.github_ndapp_repolist
+package com.isaacrf.github_ndapp_repolist.features.repo_list.viewmodels
 
 import org.junit.Test
 
@@ -9,7 +9,7 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class RepoListServiceTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
