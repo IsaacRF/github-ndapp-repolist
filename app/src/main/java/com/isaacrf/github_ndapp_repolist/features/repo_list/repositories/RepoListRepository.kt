@@ -16,7 +16,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class RepoListRepository @Inject constructor(
-    private val repoListService: RepoListService
+    val repoListService: RepoListService
 ){
     /**
      * GET repos for specified organization name
@@ -28,8 +28,8 @@ class RepoListRepository @Inject constructor(
                 data.value = response.body()
             }
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-                //TODO: Report error
-                Log.d("INJECTION TESTING", "getRepos() - Failure")
+                Log.d("RepoListRepository", "getRepos() - Failure")
+                data.value = null
             }
         })
         return data

@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName
  * A representation of a GitHub Repo basic data
  */
 data class Repo(
-    private val name: String,
-    private val description: String,
-    private val fork: Boolean,
+    val name: String,
+    val description: String,
+    val fork: Boolean,
     @SerializedName("html_url")
-    private val htmlUrl: String,
-    private val owner: Owner
+    val htmlUrl: String,
+    val owner: Owner
 ) {}

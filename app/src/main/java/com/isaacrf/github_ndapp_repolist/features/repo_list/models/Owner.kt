@@ -6,9 +6,9 @@ import com.google.gson.annotations.SerializedName
  * A representation of a GitHub Repo owner basic data
  */
 data class Owner(
-    private val login: String,
+    val login: String,
     @SerializedName("html_url")
-    private val htmlUrl: String,
+    val htmlUrl: String,
     @SerializedName("avatar_url")
-    private val avatarUrl: String
+    val avatarUrl: String
 ) {}

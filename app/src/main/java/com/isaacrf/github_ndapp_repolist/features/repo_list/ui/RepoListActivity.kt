@@ -20,9 +20,6 @@ class RepoListActivity : AppCompatActivity() {
     /*ViewModel controls business logic and data representation. A saved state factory is created
     to provide state retain across activity life cycle
      */
-    /*private val repoListViewModel: RepoListViewModel by viewModels(
-        factoryProducer = { SavedStateViewModelFactory(application, this) }
-    )*/
     private val repoListViewModel: RepoListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
