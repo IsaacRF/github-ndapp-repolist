@@ -35,7 +35,7 @@ class RepoListActivity : AppCompatActivity() {
         //Observe live data changes and update UI accordingly
         repoListViewModel.repoList.observe(this) {
             // TODO: update UI
-            Log.d("INJECTION TESTING", it.javaClass.toString())
+            Log.d("RepoListActivity", it.status.name)
         }
     }
 
