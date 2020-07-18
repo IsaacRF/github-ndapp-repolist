@@ -92,7 +92,6 @@ class RepoListViewModelTest {
         repoListViewModel = RepoListViewModel(repoListRepository, state)
         repoListViewModel.repoList.observeForever(observer)
 
-        verify(observer).onChanged(NetworkResource.loading(null))
         verify(observer).onChanged(mockData.value)
         assertNull(repoListViewModel.repoList.value?.data)
     }
