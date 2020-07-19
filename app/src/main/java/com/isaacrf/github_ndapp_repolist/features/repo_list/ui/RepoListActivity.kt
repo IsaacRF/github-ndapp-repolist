@@ -1,18 +1,23 @@
 package com.isaacrf.github_ndapp_repolist.features.repo_list.ui
 
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
-import androidx.activity.viewModels
-import androidx.lifecycle.observe
 import com.isaacrf.github_ndapp_repolist.R
 import com.isaacrf.github_ndapp_repolist.features.repo_list.viewmodels.RepoListViewModel
+import com.isaacrf.github_ndapp_repolist.shared.Status
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.repo_list_content.*
+
 
 @AndroidEntryPoint
 class RepoListActivity : AppCompatActivity() {
@@ -21,6 +26,7 @@ class RepoListActivity : AppCompatActivity() {
     to provide state retain across activity life cycle
      */
     private val repoListViewModel: RepoListViewModel by viewModels()
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +38,32 @@ class RepoListActivity : AppCompatActivity() {
                     .setAction("Action", null).show()
         }
 
+        //Recycler view config
+        layoutManager = LinearLayoutManager(this)
+        val dividerItemDecoration = DividerItemDecoration(
+            rvRepoList.context,
+            layoutManager.orientation
+        )
+        rvRepoList.addItemDecoration(dividerItemDecoration)
+        rvRepoList.layoutManager = layoutManager
+
         //Observe live data changes and update UI accordingly
         repoListViewModel.repoList.observe(this) {
-            // TODO: update UI
-            Log.d("RepoListActivity", it.status.name)
+            when(it.status) {
+                Status.LOADING -> {
+                    pbRepoListLoading.visibility = View.GONE
+                    pbRepoListLoading.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    rvRepoList.adapter = RepoListItemViewAdapter(it.data!!)
+                    pbRepoListLoading.visibility = View.GONE
+                }
+                Status.ERROR -> {
+                    txtError.text = it.message
+                    pbRepoListLoading.visibility = View.VISIBLE
+                    pbRepoListLoading.visibility = View.GONE
+                }
+            }
         }
     }
 

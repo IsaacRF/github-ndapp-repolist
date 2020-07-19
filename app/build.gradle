@@ -57,6 +57,7 @@ dependencies {
     kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle_version"
     // Activity
     implementation "androidx.activity:activity-ktx:$activity_version"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-beta8"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData
@@ -74,6 +75,8 @@ dependencies {
         }
     }
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    // EpicBitmapRenderer (library developed by me)
+    implementation 'com.isaacrf.epicbitmaprenderer:epicbitmaprenderer:1.0'
 
     testImplementation "androidx.arch.core:core-testing:2.1.0"
     testImplementation 'junit:junit:4.12'

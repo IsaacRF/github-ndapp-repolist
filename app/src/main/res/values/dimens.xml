@@ -4,4 +4,6 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="icon_size">100dp</dimen>
     <dimen name="icon_margin">12dp</dimen>
+    <dimen name="repo_list_loading_size">200dp</dimen>
+    <dimen name="repo_list_loading_margin">26dp</dimen>
 </resources>
