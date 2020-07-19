@@ -43,7 +43,9 @@ class RepoListItemViewAdapter(private val repos: List<Repo>) :
             This library is also developed by me, and automatically handles image decoding
             and caching (https://github.com/IsaacRF/EpicBitmapRenderer)
          */
-        EpicBitmapRenderer.decodeBitmapFromUrl(repo.owner.avatarUrl, holder.itemView.imgRepoOwner.width, holder.itemView.imgRepoOwner.height,
+        EpicBitmapRenderer.decodeBitmapFromUrl(repo.owner.avatarUrl,
+            holder.itemView.imgRepoOwner.width,
+            holder.itemView.imgRepoOwner.height,
             { holder.itemView.imgRepoOwner.setImageBitmap(it) },
             { Log.d("RepoListActivity", "Failed to decode image $repo.owner.avatarUrl") })
     }
