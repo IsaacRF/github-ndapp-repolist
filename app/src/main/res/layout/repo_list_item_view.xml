@@ -2,6 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeightLarge"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:padding="6dip">
 
     <ImageView
@@ -29,7 +32,7 @@
         android:text="@string/placeholder_repo_owner"
         android:textAlignment="center"
         android:textSize="12sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtRepoDescription"
