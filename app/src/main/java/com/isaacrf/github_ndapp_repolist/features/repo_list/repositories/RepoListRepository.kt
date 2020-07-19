@@ -17,7 +17,7 @@ import javax.inject.Singleton
  */
 @Singleton
 class RepoListRepository @Inject constructor(
-    val repoListService: RepoListService
+    private val repoListService: RepoListService
 ){
     /**
      * GET repos for specified organization name
@@ -25,7 +25,6 @@ class RepoListRepository @Inject constructor(
     fun getRepos(organizationName: String): LiveData<NetworkResource<List<Repo>>> {
         val data = MutableLiveData<NetworkResource<List<Repo>>>()
         data.value = NetworkResource.loading(null)
-        //TODO: Expose call state
         repoListService.getRepos(organizationName, 1).enqueue(object : Callback<List<Repo>> {
             override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
                 data.value = NetworkResource.success(response.body())

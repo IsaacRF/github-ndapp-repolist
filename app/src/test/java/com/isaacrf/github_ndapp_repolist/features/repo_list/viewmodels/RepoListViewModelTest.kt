@@ -36,7 +36,7 @@ class RepoListViewModelTest {
     private lateinit var observer: Observer<NetworkResource<List<Repo>>>
     private lateinit var repoListViewModel: RepoListViewModel
 
-    private var testOrganization = "Xing"
+    private val testOrganization = "Xing"
 
     @Before
     @Throws(Exception::class)
