@@ -13,11 +13,32 @@ import kotlinx.android.synthetic.main.repo_list_item_view.view.*
 /**
  * UI Adapter for RepoList RecyclerView items
  */
-class RepoListItemViewAdapter(private val repos: List<Repo>) :
+class RepoListItemViewAdapter(private val repos: List<Repo>, private val onRepoListener: OnRepoListener) :
     RecyclerView.Adapter<RepoListItemViewAdapter.ViewHolder>() {
 
+    interface OnRepoListener {
+        fun onRepoClick(repo: Repo)
+        fun onRepoLongClick(repo: Repo)
+    }
+
     // Provide a reference to the views for each data item
-    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
+    class ViewHolder(view: View, private val onRepoListener: OnRepoListener, private val repos: List<Repo>) :
+        RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
+
+        init {
+            view.setOnClickListener(this)
+            view.setOnLongClickListener(this)
+        }
+
+        override fun onClick(view: View) {
+            onRepoListener.onRepoClick(repos[adapterPosition])
+        }
+
+        override fun onLongClick(view: View): Boolean {
+            onRepoListener.onRepoLongClick(repos[adapterPosition])
+            return true
+        }
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +49,7 @@ class RepoListItemViewAdapter(private val repos: List<Repo>) :
             .inflate(R.layout.repo_list_item_view, parent, false) as View
         // set the view's size, margins, paddings and layout parameters
         //...
-        return ViewHolder(view)
+        return ViewHolder(view, onRepoListener, repos)
     }
 
     override fun getItemCount(): Int = repos.size

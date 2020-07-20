@@ -4,4 +4,7 @@
     <string name="placeholder_repo_owner">Owner</string>
     <string name="placeholder_repo_name">Repo Name</string>
     <string name="placeholder_repo_description">Repo description</string>
+    <string name="dialog_repo_navigation_title">Go to…</string>
+    <string name="dialog_repo_navigation_option_repo_url">Repo Website</string>
+    <string name="dialog_repo_navigation_option_owner_url">Owner Website</string>
 </resources>
