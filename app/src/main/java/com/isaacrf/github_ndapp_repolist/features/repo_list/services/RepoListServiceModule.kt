@@ -13,11 +13,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-
+/**
+ * Provides Repo List Service instantiations
+ */
 @Module
 @InstallIn(ApplicationComponent::class)
-object TestModule {
+object RepoListServiceModule {
 
+    /**
+     * Provides instantiation for http client interface
+     */
     @Provides
     @Singleton
     fun provideRepoListService(): RepoListService {

@@ -24,12 +24,17 @@ class RepoListItemViewAdapter(
 
     private lateinit var context: Context
 
+    /**
+     * Listener to override click and long click actions
+     */
     interface OnRepoListener {
         fun onRepoClick(repo: Repo)
         fun onRepoLongClick(repo: Repo)
     }
 
-    // Provide a reference to the views for each data item
+    /**
+     * Provide a reference to the views for each data item
+     */
     class ViewHolder(
         view: View,
         private val onRepoListener: OnRepoListener,

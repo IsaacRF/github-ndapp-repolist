@@ -13,7 +13,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Layer to abstract data access
+ * Layer to abstract data access to repo list info
  */
 @Singleton
 class RepoListRepository @Inject constructor(

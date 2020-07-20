@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Xing Repolist</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_about_isaacrf">About IsaacRF</string>
+    <string name="action_repos_isaacrf">IsaacRF Repos</string>
     <string name="placeholder_repo_owner">Owner</string>
     <string name="placeholder_repo_name">Repo Name</string>
     <string name="placeholder_repo_description">Repo description</string>

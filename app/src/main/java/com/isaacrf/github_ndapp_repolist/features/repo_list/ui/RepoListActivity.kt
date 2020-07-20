@@ -33,13 +33,17 @@ class RepoListActivity : AppCompatActivity(), RepoListItemViewAdapter.OnRepoList
     private val repoListViewModel: RepoListViewModel by viewModels()
     private lateinit var layoutManager: LinearLayoutManager
 
+    private val websiteXing = "https://github.com/orgs/xing"
+    private val websiteIsaacRF = "https://isaacrf.com/about"
+    private val websiteIsaacRFRepos = "https://github.com/isaacrf"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.repo_list_activity)
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            openWebPage("https://github.com/orgs/xing")
+            openWebPage(websiteXing)
         }
 
         //Recycler view config
@@ -83,7 +87,14 @@ class RepoListActivity : AppCompatActivity(), RepoListItemViewAdapter.OnRepoList
         // as you specify a parent activity in AndroidManifest.xml.
 
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_about_isaacrf -> {
+                openWebPage(websiteIsaacRF)
+                return true
+            }
+            R.id.action_repos_isaacrf -> {
+                openWebPage(websiteIsaacRFRepos)
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

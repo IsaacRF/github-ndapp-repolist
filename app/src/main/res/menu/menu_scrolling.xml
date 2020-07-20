@@ -3,8 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.isaacrf.github_ndapp_repolist.features.repo_list.ui.RepoListActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_about_isaacrf"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/action_about_isaacrf"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_repos_isaacrf"
+        android:orderInCategory="100"
+        android:title="@string/action_repos_isaacrf"
         app:showAsAction="never" />
 </menu>
