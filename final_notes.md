@@ -34,12 +34,12 @@ Testing project replicates the same feature structure to ease test running separ
 #### LiveData / Observable Pattern
 Data is handled via [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) / Observable Pattern instead of RxJava, as it's better performant and includes a series of benefits as, for example, avoiding manual app lifecycle management.
 
-*RepoListViewModel.kt*
+***RepoListViewModel***
 ```Kotlin
 val repoList: LiveData<NetworkResource<List<Repo>>> = repoListRepository.getRepos(organizationName)
 ```
 
-*RepoListActivity.kt*
+***RepoListActivity***
 ```Kotlin
 //Observe live data changes and update UI accordingly
 repoListViewModel.repoList.observe(this) {
@@ -56,13 +56,13 @@ Project implements Dependency Injection (SOLI**D**) to isolate modules, avoid in
 
 Dependency Injection is handled via [Hilt](https://developer.android.com/training/dependency-injection/hilt-android), a library that uses Dagger under the hood easing its implementation via @ annotations, and is developed and recommended to use by Google.
 
-*GithubNdApp.kt (App main class)*
+***GithubNdApp (App main class)***
 ```Kotlin
 @HiltAndroidApp
 class GithubNdApp : Application() {}
 ```
 
-*RepoListActivity*
+***RepoListActivity***
 ```Kotlin
 @AndroidEntryPoint
 class RepoListActivity : AppCompatActivity(), RepoListItemViewAdapter.OnRepoListener {
@@ -70,7 +70,7 @@ class RepoListActivity : AppCompatActivity(), RepoListItemViewAdapter.OnRepoList
 }
 ```
 
-*RepoListViewModel*
+***RepoListViewModel***
 ```Kotlin
 class RepoListViewModel @ViewModelInject constructor (
     private val repoListRepository: RepoListRepository,
@@ -81,7 +81,7 @@ class RepoListViewModel @ViewModelInject constructor (
 ### API Calls
 API Calls are handled via [retrofit](https://square.github.io/retrofit/), declaring calls via an interface, and automatically deserialized by [Gson](https://github.com/google/gson) into model objects.
 
-*RepoListService*
+***RepoListService***
 ```Kotlin
 @Headers("Authorization: token ???????????????")
 @GET("/orgs/{organizationName}/repos")
