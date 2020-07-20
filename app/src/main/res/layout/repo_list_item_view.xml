@@ -1,66 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?><!-- TODO: Replace by ConstraintLayout -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeightLarge"
-    android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:padding="6dip">
+    android:foreground="?attr/selectableItemBackground">
 
-    <ImageView
-        android:id="@+id/imgRepoOwner"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dip"
-        android:layout_marginTop="6dip"
-        android:layout_marginRight="16dip"
-        android:layout_marginBottom="6dip"
-        android:contentDescription="@string/placeholder_repo_owner"
-        android:src="@mipmap/ic_launcher_round" />
-
-    <TextView
-        android:id="@+id/txtOwner"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgRepoOwner"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="6dip"
-        android:layout_marginRight="6dip"
-        android:ellipsize="marquee"
-        android:gravity="center"
-        android:text="@string/placeholder_repo_owner"
-        android:textAlignment="center"
-        android:textSize="12sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/txtRepoDescription"
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="26dip"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@id/imgRepoOwner"
-        android:layout_toRightOf="@id/imgRepoOwner"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:text="@string/placeholder_repo_description"
-        android:textSize="14sp" />
+        android:layout_height="?android:attr/listPreferredItemHeightLarge"
+        android:padding="6dip"
+        tools:ignore="UselessParent">
 
-    <TextView
-        android:id="@+id/txtRepoName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignWithParentIfMissing="true"
-        android:layout_above="@id/txtRepoDescription"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_toEndOf="@id/imgRepoOwner"
-        android:layout_toRightOf="@id/imgRepoOwner"
-        android:gravity="center_vertical"
-        android:text="@string/placeholder_repo_name"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imgRepoOwner"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dip"
+            android:layout_marginTop="6dip"
+            android:layout_marginRight="16dip"
+            android:layout_marginBottom="6dip"
+            android:contentDescription="@string/placeholder_repo_owner"
+            android:src="@mipmap/ic_launcher_round" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/txtOwner"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgRepoOwner"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="6dip"
+            android:layout_marginRight="6dip"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:text="@string/placeholder_repo_owner"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtRepoDescription"
+            android:layout_width="fill_parent"
+            android:layout_height="26dip"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/imgRepoOwner"
+            android:layout_toRightOf="@id/imgRepoOwner"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="@string/placeholder_repo_description"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtRepoName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_above="@id/txtRepoDescription"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/imgRepoOwner"
+            android:layout_toRightOf="@id/imgRepoOwner"
+            android:gravity="center_vertical"
+            android:text="@string/placeholder_repo_name"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+</FrameLayout>
+

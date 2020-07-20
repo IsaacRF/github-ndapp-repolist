@@ -1,9 +1,12 @@
 package com.isaacrf.github_ndapp_repolist.features.repo_list.ui
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.isaacrf.epicbitmaprenderer.core.EpicBitmapRenderer
 import com.isaacrf.github_ndapp_repolist.R
@@ -13,8 +16,13 @@ import kotlinx.android.synthetic.main.repo_list_item_view.view.*
 /**
  * UI Adapter for RepoList RecyclerView items
  */
-class RepoListItemViewAdapter(private val repos: List<Repo>, private val onRepoListener: OnRepoListener) :
+class RepoListItemViewAdapter(
+    private val repos: List<Repo>,
+    private val onRepoListener: OnRepoListener
+) :
     RecyclerView.Adapter<RepoListItemViewAdapter.ViewHolder>() {
+
+    private lateinit var context: Context
 
     interface OnRepoListener {
         fun onRepoClick(repo: Repo)
@@ -22,7 +30,11 @@ class RepoListItemViewAdapter(private val repos: List<Repo>, private val onRepoL
     }
 
     // Provide a reference to the views for each data item
-    class ViewHolder(view: View, private val onRepoListener: OnRepoListener, private val repos: List<Repo>) :
+    class ViewHolder(
+        view: View,
+        private val onRepoListener: OnRepoListener,
+        private val repos: List<Repo>
+    ) :
         RecyclerView.ViewHolder(view), View.OnClickListener, View.OnLongClickListener {
 
         init {
@@ -44,11 +56,10 @@ class RepoListItemViewAdapter(private val repos: List<Repo>, private val onRepoL
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        // create a new view
+        context = parent.context
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.repo_list_item_view, parent, false) as View
-        // set the view's size, margins, paddings and layout parameters
-        //...
         return ViewHolder(view, onRepoListener, repos)
     }
 
@@ -69,5 +80,9 @@ class RepoListItemViewAdapter(private val repos: List<Repo>, private val onRepoL
             holder.itemView.imgRepoOwner.height,
             { holder.itemView.imgRepoOwner.setImageBitmap(it) },
             { Log.d("RepoListActivity", "Failed to decode image $repo.owner.avatarUrl") })
+
+        if (repo.fork) {
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorForkBackground))
+        }
     }
 }

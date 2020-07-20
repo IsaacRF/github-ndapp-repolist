@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#4E4E4E</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="colorSecondary">#3F51B5</color>
+    <color name="colorForkBackground">#DCFFDE</color>
 </resources>
