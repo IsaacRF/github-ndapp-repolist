@@ -6,7 +6,7 @@
 
 **Target SDK**: API 29
 
-Android test app built in modern Architecture that consumes GitHub API to show sample data.
+Android test app built in modern Architecture that consumes GitHub API to show sample data. This is part of a coding challenge developed for Xing, you can find the assessment details [here](https://github.com/IsaacRF/github-ndapp-repolist/blob/master/ASSESSMENT.md)
 
 ![github-ndapp-demo](https://user-images.githubusercontent.com/2803925/87967017-785a4400-cabe-11ea-9890-7fe077d2a221.gif)
 
