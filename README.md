@@ -1,50 +1,117 @@
-# XING Android Coding Challenge
+# Github NdApp
 
-Welcome to the XING Coding Challenge! This challenge will give us an idea about your coding skills.
+**Author**: [IsaacRF239](https://isaacrf.com/about)
 
+**Minimum SDK**: API 16
 
-## Prerequisites
+**Target SDK**: API 29
 
-* Feel free to use Java or Kotlin for this challenge.
-* Do not focus too much on the design of the UI.
-* The usage of third party libraries is explicitly allowed.
-* Provide a comprehensive git history.
-* If you want to use different branches, please make sure that they’ll be merged into master branch when you’ll finish the task.
-* If your API request limit exceeds, you can generate and use a personal access token [here](https://github.com/settings/applications) and add `?access_token=<YOUR_ACCESS_TOKEN>` to the request URLs.
+Android test app built in modern Architecture that consumes GitHub API to show sample data.
 
+![github-ndapp-demo](https://user-images.githubusercontent.com/2803925/87967017-785a4400-cabe-11ea-9890-7fe077d2a221.gif)
 
-## Goals
+## Main Features
 
-1. Clone this repository. Use it as your working directory.
-2. Bootstrap a new empty application.
-3. Request the GitHub API to show [XING's public repositories](https://api.github.com/orgs/xing/repos) and parse the JSON response. You can find documentation to the call [here](https://developer.github.com/v3/repos/#list-organization-repositories).
-4. Display a list of repositories, each entry showing
-	* name of repository
-	* description
-	* login of the owner
-5. Show a light green background if the repository is forked and a white one otherwise.
-6. The business logic should be tested by unit tests.
+### MVVM Architecture
+This project uses [MVVM](https://developer.android.com/jetpack/docs/guide) (Model - View - Viewmodel) architecture, via new [Jetpack ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) feature.
 
+![image](https://user-images.githubusercontent.com/2803925/87967886-d3d90180-cabf-11ea-86fc-47e19eb460e7.png)
 
+### Development Patterns
+This project implements "By feature + layout" structure, [Separation of Concerns](https://en.wikipedia.org/wiki/Separation_of_concerns) pattern and [SOLID](https://en.wikipedia.org/wiki/SOLID) principles.
 
-## Bonus Goals
+#### By feature + layout structure
+Project architecture combines the "By feature" structure, consisting on separating all files concerning to a specific feature (for example, an app screen / section) on its own package, plus the "By layout" classic structure, separating all files serving a similar purpose on its own sub-package.
 
-* Cache the data so it is available offline.
-* Implement a load more mechanism. The load more should be triggered when the scrolling is close to reaching the end of the list. Check out the [pagination documentation](https://developer.github.com/v3/#pagination) for more info.
-* On a long-press on a list item show a dialog to ask if should go to repository html_url or owner html_url which is then opened in the browser.
-* Display owner’s avatar image and cache it accordingly.
+By feature structure complies with the Separation of Concerns and encapsulation patterns, also making the app highly scalable, modular and way easier to manipulate, as deleting or adding features impact only app base layer and refactor is minimum to non-existent.
 
-## General Advice and Tips
-* Please keep code as simple as possible and remove any unused code.
-* Project is well-structured.
-* We would prefer if you follow the material design guidelines.
-* Keep in mind the [Separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), and the [SOLID principles](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design)).
-* You can use a reactive approach (Ex. RxJava).
-* Make sure the app runs on a ICS+ device.
-* Don't forget the tests, they are really important for us.
-* Be conscious and consistent regarding your coding style.
-* Have fun reading and writing code.
-* If you have any final comments about your result please let us know via [final_notes.md](final_notes.md)
-* Once you finish create a release and notify barcelona-hiring@xing.com
+![ByFeatureFolderStructure](https://user-images.githubusercontent.com/2803925/87969071-befd6d80-cac1-11ea-8b29-e421c1e3cc5c.png)
 
-Now, let's get started. We wish you good luck!
+Testing project replicates the same feature structure to ease test running separation
+
+![TestFolderStructure](https://user-images.githubusercontent.com/2803925/87969224-0126af00-cac2-11ea-9c4b-5f26ec355ef3.png)
+
+#### LiveData / Observable Pattern
+Data is handled via [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) / Observable Pattern instead of RxJava, as it's better performant and includes a series of benefits as, for example, avoiding manual app lifecycle management.
+
+***RepoListViewModel***
+```Kotlin
+val repoList: LiveData<NetworkResource<List<Repo>>> = repoListRepository.getRepos(organizationName)
+```
+
+***RepoListActivity***
+```Kotlin
+//Observe live data changes and update UI accordingly
+repoListViewModel.repoList.observe(this) {
+    when(it.status) {
+        Status.LOADING -> {}
+        Status.SUCCESS -> {}
+        Status.ERROR -> {}
+    }
+}
+```
+
+#### Dependency Injection
+Project implements Dependency Injection (SOLI**D**) to isolate modules, avoid inter-dependencies and make testing easier
+
+Dependency Injection is handled via [Hilt](https://developer.android.com/training/dependency-injection/hilt-android), a library that uses Dagger under the hood easing its implementation via @ annotations, and is developed and recommended to use by Google.
+
+***GithubNdApp (App main class)***
+```Kotlin
+@HiltAndroidApp
+class GithubNdApp : Application() {}
+```
+
+***RepoListActivity***
+```Kotlin
+@AndroidEntryPoint
+class RepoListActivity : AppCompatActivity(), RepoListItemViewAdapter.OnRepoListener {
+    private val repoListViewModel: RepoListViewModel by viewModels()
+}
+```
+
+***RepoListViewModel***
+```Kotlin
+class RepoListViewModel @ViewModelInject constructor (
+    private val repoListRepository: RepoListRepository,
+    @Assisted private val state: SavedStateHandle
+) : ViewModel() {}
+```
+
+### API Calls
+API Calls are handled via [retrofit](https://square.github.io/retrofit/), declaring calls via an interface, and automatically deserialized by [Gson](https://github.com/google/gson) into model objects.
+
+***RepoListService***
+```Kotlin
+@Headers("Authorization: token ???????????????")
+@GET("/orgs/{organizationName}/repos")
+fun getRepos(
+    @Path("organizationName") organizationName: String,
+    @Query("page") page: Int
+): Call<List<Repo>>
+```
+
+#### Forcing TLS1.2 on Android 4.1 (API 16) - 5.0 (API 21)
+Android mininum SDK has been stablished in API 16 to avoid security conflicts against GitHub API.
+
+GitHub API deprecated the SSLv3 and TLSv1.0 connection protocols for security reasons in favor of TLSv1.3 and TLSv1.2, as can be seen here: https://www.ssllabs.com/ssltest/analyze.html?d=api.github.com 
+
+![GitHubAPITLS](https://user-images.githubusercontent.com/2803925/87972762-bc9e1200-cac7-11ea-97ef-79343834f69c.png)
+
+![GitHubAPICiphers](https://user-images.githubusercontent.com/2803925/87972764-bd36a880-cac7-11ea-8b7f-cd91ea42630e.png)
+
+As stated in Google Developer guidelines (https://developer.android.com/reference/javax/net/ssl/SSLSocket.html), TLSv1.2 protocol is only available in Android 4.1+ (not enabled by default, requiring some tweaks), and in Android 5.0+ (enabled by default). So any Android version below 4.1 uses TLSv1.0 or TLSv1.1, and fails to establish a secure SSL connection with the API, being unable to retrieve any data.
+
+![AndroidTLSSupport](https://user-images.githubusercontent.com/2803925/87972766-bd36a880-cac7-11ea-9a15-66ceeb48607c.png)
+
+The required tweaks to run the api calls on API 14 -> 21 are done via a custom [TLS Socked Factory](https://github.com/xing/test_android_isaacrf/blob/master/app/src/main/java/com/isaacrf/github_ndapp_repolist/shared/TLSSocketFactory.kt) that forces the enabling of TLSv1.2 when available, and also forces the ciphers required by the API.
+
+### Image rendering and caching
+Repo owner avatar image is rendered and cached using [EpicBitmapRenderer](https://github.com/IsaacRF/EpicBitmapRenderer), a Java library I also developed.
+
+![EpicBitmapRenderer Icon](http://isaacrf.com/libs/epicbitmaprenderer/images/EpicBitmapRenderer-Icon.png)
+
+### Testing
+All business logic and services are tested using [Mockito](https://site.mockito.org/) and okhttp [Mockwebserver](https://github.com/square/okhttp/tree/master/mockwebserver).
+
+Every test is isolated, and all API calls are mocked to avoid test results to depend on external sources, becoming unrealiable and possibly leading to unexpected results.
